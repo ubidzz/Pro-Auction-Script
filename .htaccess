@@ -1,0 +1,53 @@
+# secure htaccess file
+<Files .htaccess>
+ order allow,deny
+ deny from all
+</Files>
+
+# disable directory browsing
+Options -Indexes
+
+# disabel access to logs/template files
+<Files ~ "\.(log|tpl)$">
+ order allow,deny
+ deny from all
+</files>
+
+
+
+
+RewriteEngine on
+
+# home
+RewriteRule ^([home]+)$ index.php [NC,L]
+RewriteRule ^([home]+)-(.*)?$ index.php?$2 [NC,L]
+
+# register
+RewriteRule ^([new_account]+)$ new_acc.php [NC,L]
+RewriteRule ^([new_account]+)-([facebook]+)?$ new_acc.php?$2=link [NC,L]
+
+# category
+RewriteRule ^cat/([a-zA-Z0-9---_]+)$ browse.php?id=$1 [NC,L]
+RewriteRule ^cat/([a-zA-Z0-9---_]+)-(.*)?$ browse.php?id=$1$2 [NC,L]
+
+# item pages
+RewriteRule ^products/([a-zA-Z0-9-]+)-([0-9]+)?$ item.php?id=$2 [NC,L] 
+
+RewriteRule ^products/([a-zA-Z0-9-]+)-([0-9]+)-([facebook]+)?$ item.php?id=$2&facebook=login [NC,L]
+
+# item messages
+RewriteRule ^products/([message.php]+)?$ message.php [NC,L]
+
+# the news page
+RewriteRule ^news/([a-zA-Z0-9-]+)-([0-9]+)?$ viewnews.php?id=$2 [NC,L]
+
+# user support pages  
+RewriteRule ^([support]+)-(.*)?$ your_support_messages.php?x=$2 [NC,L]
+RewriteRule ^([delete]+)-([0-9]+)?$ my_support.php?deleteid[]=$2 [NC,L]
+RewriteRule ^([support]+)$ my_support.php [NC,L]
+
+# item question page
+RewriteRule ^question/([a-zA-Z0-9-]+)-([0-9]+)?$ send_email.php?auction_id=$2 [NC,L]
+
+#Live Chat
+RewriteRule ^([chat]+)$ /chat/index.php [NC,L]

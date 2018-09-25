@@ -1,0 +1,1 @@
+<div class="alert alert-info" role="alert"><span class="glyphicon glyphicon-exclamation-sign"></span> <b>{TITLE_MESSAGE}:</b> {BODY_MESSAGE}</div>
